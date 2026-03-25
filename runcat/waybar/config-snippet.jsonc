@@ -1,0 +1,9 @@
+{
+  "custom/runcat": {
+    "return-type": "json",
+    "format": "{}",
+    "exec": "~/.local/share/runcat/scripts/runcat.py --interval 0.4",
+    "restart-interval": 1,
+    "on-click": "kitty -e btop"
+  }
+}
