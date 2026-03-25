@@ -24,7 +24,10 @@ from typing import Iterable
 try:
     import tomllib  # Python 3.11+
 except ModuleNotFoundError:  # pragma: no cover
-    import tomli as tomllib  # type: ignore
+    try:
+        import tomli as tomllib  # type: ignore
+    except ModuleNotFoundError:  # pragma: no cover
+        tomllib = None  # type: ignore
 
 BARS = "▁▂▃▄▅▆▇█"
 
@@ -63,6 +66,10 @@ class Config:
 def load_config(path: Path) -> Config:
     if not path.exists():
         return Config()
+    if tomllib is None:
+        raise RuntimeError(
+            "TOML parser unavailable. Install tomli for Python <3.11 or use Python 3.11+."
+        )
     with path.open("rb") as f:
         raw = tomllib.load(f)
     data = raw.get("kurve", {})
