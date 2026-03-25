@@ -1,32 +1,30 @@
-# Liquid Glass AGS Bar (Hyprland)
+# Liquid Glass AGS Bar (Hyprland) — AGS v2/v3
 
-This folder contains an **AGS-only** bar implementation with:
-
-- Left: Hyprland workspaces + active window title
-- Center: Clock
-- Right: Network, audio, battery, tray
+This folder now targets **modern AGS (v2/v3 generation)** using an `app.tsx` entrypoint.
 
 ## Files
 
-- `config.js`: AGS bar and module logic
+- `app.tsx`: AGS v2/v3-style app entry
 - `style.css`: segmented liquid-glass theme
+- `config.js`: legacy AGS v1 version (kept only for reference)
 
 ## Install
 
 ```bash
 mkdir -p ~/.config/ags
-cp /workspace/Arch/ags/config.js ~/.config/ags/config.js
+cp /workspace/Arch/ags/app.tsx ~/.config/ags/app.tsx
 cp /workspace/Arch/ags/style.css ~/.config/ags/style.css
 ```
 
-## Launch / Reload
+## Run / Reload
 
 ```bash
-ags -q
-ags
+ags run ~/.config/ags/app.tsx
 ```
 
 ## Notes
 
-- AGS v1-style setup (`config.js`).
-- For stronger frosted blur, enable Hyprland blur in compositor settings.
+- AGS v1 and AGS v2/v3 are not API-compatible; this port follows the current entrypoint model (`app.start`).
+- This modernized version keeps the same liquid-glass look and core layout (workspaces, active window, clock).
+- Right-side system modules from the legacy v1 service API are intentionally reduced in this version to avoid mixing deprecated interfaces.
+- Polling/parsing is implemented with shell tools only (no `jq` requirement).
