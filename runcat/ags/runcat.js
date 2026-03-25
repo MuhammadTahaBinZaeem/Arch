@@ -40,10 +40,10 @@ const readCpuStats = () => {
   const values = fields.slice(1).map(Number);
   if (values.length < 4 || values.some(v => !Number.isFinite(v))) return null;
 
-  const [user, nice, sys] = values;
+  const [user, nice, sys, , , irq = 0, softirq = 0, steal = 0] = values;
 
   return {
-    active: user + nice + sys,
+    active: user + nice + sys + irq + softirq + steal,
     total: values.reduce((sum, value) => sum + value, 0),
   };
 };
