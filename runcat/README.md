@@ -54,6 +54,15 @@ Add `"custom/runcat"` to your bar modules list.
 ~/.local/share/runcat/scripts/runcat.py --interval 0.4
 ```
 
+
+## AGS version (1:1 sprite + timing recreation)
+
+If you are using AGS instead of Waybar, use the files in `runcat/ags/`:
+
+- `runcat/ags/runcat.js` - widget implementation
+- `runcat/ags/icons/` - upstream GNOME RunCat sprites
+- `runcat/ags/README.md` - usage instructions
+
 ## Optional systemd user service
 
 ```bash
