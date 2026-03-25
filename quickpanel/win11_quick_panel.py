@@ -54,12 +54,17 @@ class CommandError(RuntimeError):
 
 
 def run(cmd: str, check: bool = True) -> str:
-    proc = subprocess.run(
-        shlex.split(cmd),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-    )
+    try:
+        proc = subprocess.run(
+            shlex.split(cmd),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+    except FileNotFoundError:
+        if check:
+            raise CommandError(f"Command not found: {cmd}")
+        return ""
     if check and proc.returncode != 0:
         raise CommandError(proc.stderr.strip() or f"Command failed: {cmd}")
     return proc.stdout.strip()
@@ -244,7 +249,15 @@ class QuickPanel(Gtk.Window):
         return dunst == "true"
 
     def _battery_percent(self) -> int:
-        out = run("upower -i $(upower -e | grep BAT | head -n1)", check=False)
+        devices = run("upower -e", check=False)
+        battery_device = next(
+            (line.strip() for line in devices.splitlines() if "battery" in line.lower()),
+            "",
+        )
+        if not battery_device:
+            return 0
+
+        out = run(f"upower -i {shlex.quote(battery_device)}", check=False)
         for line in out.splitlines():
             if "percentage" in line:
                 try:
