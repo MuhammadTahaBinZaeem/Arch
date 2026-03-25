@@ -36,12 +36,15 @@ const readCpuStats = () => {
   const line = ByteArray.toString(bytes).split('\n').find(l => l.startsWith('cpu '));
   if (!line) return null;
 
-  const [, user, nice, sys, idle] = line.trim().split(/\s+/).map((v, i) => i === 0 ? v : Number(v));
-  if ([user, nice, sys, idle].some(v => !Number.isFinite(v))) return null;
+  const fields = line.trim().split(/\s+/);
+  const values = fields.slice(1).map(Number);
+  if (values.length < 4 || values.some(v => !Number.isFinite(v))) return null;
+
+  const [user, nice, sys] = values;
 
   return {
     active: user + nice + sys,
-    total: user + nice + sys + idle,
+    total: values.reduce((sum, value) => sum + value, 0),
   };
 };
 
