@@ -96,6 +96,14 @@ If you see JSON frames while audio is playing, integration is working.
 
 ---
 
+
+## AGS rebuild (new)
+
+If you moved from Plasma/Waybar modules to **AGS**, use `kurve/ags/kurve.js`.
+It ports Kurve's core canvas animation modes (bars/wave/blocks + circle mode) using GTK/Cairo and CAVA ASCII frames.
+
+See: `kurve/ags/README.md`
+
 ## Notes
 
 - This is intentionally **Hyprland-native deployment** (Waybar module) instead of trying to host KDE QML in Hyprland.
