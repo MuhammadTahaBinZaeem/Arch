@@ -1,0 +1,34 @@
+<svg width="1600" height="180" viewBox="0 0 1600 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="180" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#152a4b"/>
+      <stop offset="1" stop-color="#1f3559"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="0" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="rgba(255,255,255,0.46)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0.16)"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1600" height="180" fill="url(#bg)"/>
+
+  <rect x="16" y="20" width="530" height="58" rx="18" fill="#ffffff24" stroke="#ffffff88"/>
+  <rect x="616" y="20" width="360" height="58" rx="18" fill="#ffffff24" stroke="#ffffff88"/>
+  <rect x="1048" y="20" width="536" height="58" rx="18" fill="#ffffff24" stroke="#ffffff88"/>
+
+  <rect x="30" y="31" width="150" height="36" rx="12" fill="#0c1f3899" stroke="#ffffff33"/>
+  <rect x="190" y="31" width="340" height="36" rx="12" fill="#0c1f3899" stroke="#ffffff33"/>
+  <rect x="632" y="31" width="328" height="36" rx="12" fill="#0c1f3899" stroke="#ffffff33"/>
+  <rect x="1062" y="31" width="126" height="36" rx="12" fill="#0c1f3899" stroke="#ffffff33"/>
+  <rect x="1198" y="31" width="134" height="36" rx="12" fill="#0c1f3899" stroke="#ffffff33"/>
+  <rect x="1342" y="31" width="126" height="36" rx="12" fill="#0c1f3899" stroke="#ffffff33"/>
+  <rect x="1478" y="31" width="92" height="36" rx="12" fill="#0c1f3899" stroke="#ffffff33"/>
+
+  <text x="46" y="54" fill="#f7fbff" font-size="17" font-family="Inter, sans-serif"> 1    2    3</text>
+  <text x="208" y="54" fill="#f7fbff" font-size="16" font-family="Inter, sans-serif">   Hyprland + Waybar Liquid Glass</text>
+  <text x="654" y="54" fill="#f7fbff" font-size="16" font-family="Inter, sans-serif">  Wed 25 Mar  18:42</text>
+  <text x="1080" y="54" fill="#f7fbff" font-size="16" font-family="Inter, sans-serif">  87%</text>
+  <text x="1215" y="54" fill="#f7fbff" font-size="16" font-family="Inter, sans-serif">  42%</text>
+  <text x="1358" y="54" fill="#f7fbff" font-size="16" font-family="Inter, sans-serif">󰂂  91%</text>
+  <text x="1498" y="54" fill="#f7fbff" font-size="16" font-family="Inter, sans-serif"> </text>
+</svg>
