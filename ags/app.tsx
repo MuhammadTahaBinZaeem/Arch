@@ -76,22 +76,27 @@ function Bar(monitor: Gdk.Monitor) {
             class="bar-window"
             application={app}
             name={`liquid-bar-${monitor.get_connector() ?? "0"}`}>
-            <centerbox class="bar">
-                <Section class="left">
-                    <Workspaces />
-                    <ActiveWindow />
-                </Section>
-
-                <Section class="center">
-                    <Clock />
-                </Section>
-
-                <Section class="right">
-                    <ModuleBox class="hint">
-                        <label label="AGS v2/v3" />
-                    </ModuleBox>
-                </Section>
-            </centerbox>
+            <centerbox
+                class="bar"
+                startWidget={
+                    <Section class="left">
+                        <Workspaces />
+                        <ActiveWindow />
+                    </Section>
+                }
+                centerWidget={
+                    <Section class="center">
+                        <Clock />
+                    </Section>
+                }
+                endWidget={
+                    <Section class="right">
+                        <ModuleBox class="hint">
+                            <label label="AGS v2/v3" />
+                        </ModuleBox>
+                    </Section>
+                }
+            />
         </window>
     )
 }
