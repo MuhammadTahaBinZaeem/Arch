@@ -1,9 +1,0 @@
-{
-  "custom/kurve": {
-    "exec": "~/.local/bin/kurve_hyprland.py --config ~/.config/kurve/kurve.toml",
-    "return-type": "json",
-    "format": "{}",
-    "interval": "once",
-    "tooltip": true
-  }
-}
