@@ -36,15 +36,15 @@ const readCpuStats = () => {
   const line = ByteArray.toString(bytes).split('\n').find(l => l.startsWith('cpu '));
   if (!line) return null;
 
-  const fields = line.trim().split(/\s+/).slice(1).map(Number);
-  // /proc/stat cpu fields: user nice system idle iowait irq softirq steal guest guest_nice
-  // guest and guest_nice are already included in user and nice, so only sum up to steal.
-  const [user, nice, sys, idle, iowait = 0, irq = 0, softirq = 0, steal = 0] = fields;
-  if ([user, nice, sys, idle, iowait, irq, softirq, steal].some(v => !Number.isFinite(v))) return null;
+  const fields = line.trim().split(/\s+/);
+  const values = fields.slice(1).map(Number);
+  if (values.length < 4 || values.some(v => !Number.isFinite(v))) return null;
+
+  const [user, nice, sys, , , irq = 0, softirq = 0, steal = 0] = values;
 
   return {
     active: user + nice + sys + irq + softirq + steal,
-    total: user + nice + sys + idle + iowait + irq + softirq + steal,
+    total: values.reduce((sum, value) => sum + value, 0),
   };
 };
 
