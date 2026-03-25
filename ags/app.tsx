@@ -13,13 +13,7 @@ function ModuleBox(props: { class: string; children: JSX.Element[] | JSX.Element
     return <box class={`module ${props.class}`}>{props.children}</box>
 }
 
-function WorkspaceButton(id: number) {
-    const activeWorkspaceId = createPoll("1", POLL_MS, [
-        "bash",
-        "-lc",
-        "hyprctl activeworkspace -j 2>/dev/null | sed -nE 's/.*\"id\"[[:space:]]*:[[:space:]]*([0-9]+).*/\\1/p' | head -n1",
-    ])
-
+function WorkspaceButton(id: number, activeWorkspaceId: ReturnType<typeof createPoll>) {
     return (
         <button
             class={activeWorkspaceId((v) => `workspace-btn${Number(v) === id ? " active" : ""}`)}
@@ -31,9 +25,15 @@ function WorkspaceButton(id: number) {
 }
 
 function Workspaces() {
+    const activeWorkspaceId = createPoll("1", POLL_MS, [
+        "bash",
+        "-lc",
+        "hyprctl activeworkspace -j 2>/dev/null | python -c 'import json,sys; print(json.load(sys.stdin).get(\"id\", 1))' 2>/dev/null || echo 1",
+    ])
+
     return (
         <ModuleBox class="workspaces">
-            <box spacing={6}>{Array.from({ length: 10 }, (_, i) => WorkspaceButton(i + 1))}</box>
+            <box spacing={6}>{Array.from({ length: 10 }, (_, i) => WorkspaceButton(i + 1, activeWorkspaceId))}</box>
         </ModuleBox>
     )
 }
@@ -42,7 +42,7 @@ function ActiveWindow() {
     const title = createPoll("Desktop", POLL_MS, [
         "bash",
         "-lc",
-        "hyprctl activewindow -j 2>/dev/null | sed -nE 's/.*\"title\"[[:space:]]*:[[:space:]]*\"([^\"]*)\".*/\\1/p' | head -n1",
+        "hyprctl activewindow -j 2>/dev/null | python -c 'import json,sys; print(json.load(sys.stdin).get(\"title\", \"Desktop\"))' 2>/dev/null || echo Desktop",
     ])
 
     return (

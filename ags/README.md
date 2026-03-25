@@ -27,4 +27,5 @@ ags run ~/.config/ags/app.tsx
 - AGS v1 and AGS v2/v3 are not API-compatible; this port follows the current entrypoint model (`app.start`).
 - This modernized version keeps the same liquid-glass look and core layout (workspaces, active window, clock).
 - Right-side system modules from the legacy v1 service API are intentionally reduced in this version to avoid mixing deprecated interfaces.
-- Polling/parsing is implemented with shell tools only (no `jq` requirement).
+- Polling/parsing avoids `jq`; JSON fields are decoded with Python so escaped quotes in window titles are handled correctly.
+- Workspace state is polled once per monitor and shared across workspace buttons to avoid redundant shell polling.
